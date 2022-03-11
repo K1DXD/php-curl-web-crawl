@@ -103,10 +103,23 @@
 
     }
 
+    class FactoryParser{
+        const PAT = '/^\w+\:..(\w+)/';
+
+        private function factoryParser(){
+            if(preg_match(self::PAT, $url, $match)){
+                echo $match[0];
+            }
+        }
+    }
+
     class DataHandler {
         private $parser;
+        private $url;
 
-        public function __construct(CurlWrapper $doc){
+        public function __construct($url){
+            $this->url = $url;
+            $doc = new CurlWrapper($this->url);
             $this->parser = new VnExpressParser($doc->wrapData());
         }
 
@@ -119,7 +132,6 @@
                 )
             );
         }
-
 
     }
 
@@ -143,11 +155,10 @@
     }
 
     $url = 'https://vnexpress.net/omicron-tang-hinh-co-lan-tranh-test-nhanh-4436735.html';
-    $pat = '/^\w+\:..(\w+)/';
     if(preg_match($pat, $url, $match)){
         echo $match[0];
     }
-    // $demo = new DataHandler(new CurlWrapper($url));
-    // $string = $demo->getData();
-    // $string = json_decode($string);
-    // var_dump($string);
+    $demo = new DataHandler($url);
+    $string = $demo->getData();
+    $string = json_decode($string);
+    var_dump($string);
