@@ -1,11 +1,9 @@
 <?php
-    include 'parser.php';
-    include 'warpper.php';
-
-    $url = 'google.com.vn';
-    $demo = new DataHandler($url);
-    $string = $demo->getData();
-    if($string){
-        $string = json_decode($string);
-        var_dump($string);
-    }
+    include 'router/router.php';
+    include 'crawler-library/parser.php';
+    include 'crawler-library/warpper.php';
+    include 'mysql/addData.php';
+    include 'mysql/conn.php';
+    include 'form/logic.php';
+    $router = new Router();
+    $router->action();
