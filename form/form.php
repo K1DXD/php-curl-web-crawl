@@ -9,8 +9,8 @@
     <body>
         <form action="<?php echo '../index.php'; ?>" method="post">
             url: <input type="text" name="url"><br>
-            username: <input type="text" name="username"><br>
-            password: <input type="text" name="password"><br>
+            SQl username: <input type="text" name="username"><br>
+            SQL password: <input type="text" name="password"><br>
             <button type="submit">Submit</button>
         </form>
     </body>
