@@ -1,13 +1,26 @@
 <?php
+    namespace App\CrawlerLibrary\Warpper;
+    use App\CrawlerLibrary\Parser\FactoryParser as FactoryParser;
+    use App\CrawlerLibrary\Warpper\CurlWrapper as CurlWrapper;
+
     class DataHandler {
         private $parser;
         private $url;
 
         public function __construct($url){
             $this->url = $url;
+            $this->parser = $this->getParser();
+        }
+
+        private function getParser(){
             $doc = new CurlWrapper($this->url);
-            $factory = new FactoryParser($this->url, $doc->wrapData());
-            $this->parser = $factory->factoryParser();
+            $doc = $doc->wrapData();
+            if($doc){
+                $factory = new FactoryParser($this->url, $doc);
+                return $factory->factoryParser();
+            }else {
+                return false;
+            }
         }
 
         public function getData(){
@@ -20,28 +33,8 @@
                     )
                 );
             }else {
-                echo 'Invalid url!!!';
                 return false;
             }
         }
 
-    }
-
-    class CurlWrapper{
-        private $url;
-
-        function __construct($url){
-            $this->url = $url;
-        }
-
-        function wrapData(){
-            $doc = new DOMDocument();
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_URL, $this->url);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-            $data = curl_exec($curl);
-            curl_close($curl);
-            $doc->loadHTML($data);
-            return $doc;
-        }
     }

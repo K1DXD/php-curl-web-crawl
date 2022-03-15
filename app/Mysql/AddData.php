@@ -1,4 +1,5 @@
 <?php
+    namespace App\Mysql;
     class AddData {
         private $connection;
 

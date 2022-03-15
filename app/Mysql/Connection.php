@@ -1,4 +1,5 @@
 <?php
+    namespace App\Mysql;
     class Connection {
         private $dns;
         private $username;
@@ -12,8 +13,8 @@
 
         public function connectDb(){
             try {
-                $connection = new PDO($this->dns, $this->username, $this->password);
-                $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $connection = new \PDO($this->dns, $this->username, $this->password);
+                $connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
                 return $connection;
             } catch(PDOExeption $e) {
                 return 'Error: ' . $e->getMessage();

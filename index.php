@@ -1,10 +1,5 @@
 <?php
-    include 'router/router.php';
-    include 'crawler-library/parser.php';
-    include 'crawler-library/warpper.php';
-    include 'crawler-library/pageParser.php';
-    include 'mysql/addData.php';
-    include 'mysql/conn.php';
-    include 'form/logic.php';
+    require_once 'vendor/autoload.php';
+    use App\Router\Router as Router;
     $router = new Router();
     $router->action();

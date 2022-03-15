@@ -7,7 +7,7 @@
         <title>Form</title>
     </head>
     <body>
-        <form action="<?php echo '../index.php'; ?>" method="post">
+        <form action="<?php echo '../../index.php'; ?>" method="post">
             url: <input type="text" name="url"><br>
             SQl username: <input type="text" name="username"><br>
             SQL password: <input type="text" name="password"><br>
