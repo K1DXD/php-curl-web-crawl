@@ -1,12 +1,17 @@
 <?php
     namespace App\CrawlerLibrary\Warpper;
-    
+    /**
+     * parse data from url
+     */
     class CurlWrapper{
         private $url;
         function __construct($url){
             $this->url = $url;
         }
 
+        /**
+         * @return DOMDocument or boolean
+         */
         function wrapData(){
             if(filter_var($this->url, FILTER_VALIDATE_URL)){
                 $doc = new \DOMDocument();

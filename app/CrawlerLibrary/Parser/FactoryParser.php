@@ -7,7 +7,9 @@
      */
     class FactoryParser{
         const PAT = '/^\w+\:..(\w+)/';
+        /** @var string*/
         private $url;
+        /** @var DOMDocument */
         private $doc;
         
         /**
@@ -19,6 +21,9 @@
             $this->doc = $doc;
         }
 
+        /**
+         * @return boolean|call caseLogic()
+         */
         function factoryParser(){
             if(preg_match(self::PAT, $this->url, $match) && $this->doc){
                 return $this->caseLogic($match[0]);

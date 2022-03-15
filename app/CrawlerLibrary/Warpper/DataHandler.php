@@ -2,9 +2,17 @@
     namespace App\CrawlerLibrary\Warpper;
     use App\CrawlerLibrary\Parser\FactoryParser as FactoryParser;
     use App\CrawlerLibrary\Warpper\CurlWrapper as CurlWrapper;
-
+    /**
+     * handler data response from CurlWrapper
+     * get the data needed
+     */
     class DataHandler {
+        /**
+         * @var boolean or PageParser
+         */
         private $parser;
+
+        /** @var string */
         private $url;
 
         public function __construct($url){
@@ -12,6 +20,9 @@
             $this->parser = $this->getParser();
         }
 
+        /**
+         * @return boolean or PageParser
+         */
         private function getParser(){
             $doc = new CurlWrapper($this->url);
             $doc = $doc->wrapData();
@@ -23,6 +34,9 @@
             }
         }
 
+        /**
+         * @return json or boolean
+         */
         public function getData(){
             if($this->parser && $this->parser->validateUrl()){
                 return json_encode(
