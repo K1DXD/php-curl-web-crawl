@@ -60,7 +60,6 @@
              */
             foreach($htmlSelector as $html){
                 $data .= substr($this->doc, $html['start'], $html['lenght']);
-                // $data .= $pat3;
             }
             return strlen($data) == 0 ? false : $data;
         }
