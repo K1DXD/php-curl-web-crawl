@@ -11,37 +11,27 @@
          * @return string
          */
         public function getTitle(){
-            $element = $this->doc->getElementsByTagName('h1');
-            return utf8_decode($element[0]->nodeValue);
+            $pat1 = '<h1 class="title-detail">';
+            $pat2 = '</h1>';
+            return $this->getData($pat1, $pat2);   
         }
 
         /**
          * @return string
          */
         public function getContent(){
-            $content;
-            $elements = $this->doc->getElementsByTagName('p');
-            foreach($elements as $element){
-                if($element->getAttribute('class') == 'Normal'){
-                    $content .= utf8_decode($element->nodeValue);
-                    $content .= '<br>';
-                }
-            }
-            return $content;
+            $pat1 = '<p class="Normal">';
+            $pat2 = '</p>';
+            return $this->getData($pat1, $pat2);  
         }
 
         /**
          * @return string
          */
         public function getDate(){
-            $date;
-            $elements = $this->doc->getElementsByTagName('span');
-            foreach($elements as $element){
-	            if($element->getAttribute('class') == 'date'){
-		            $date .= utf8_decode($element->nodeValue);
-	            }
-            }
-            return $date;
+            $pat1 = '<span class="date">';
+            $pat2 = '</span>';
+            return $this->getData($pat1, $pat2);  
         }
 
     }

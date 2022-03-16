@@ -5,7 +5,7 @@
      */
     class Parser {
         
-        /** @var DOMDocument $doc */
+        /** @var string $doc */
         protected $doc;
         public const VIETNAMNET = 'https://dantri';
         public const DANTRI = 'https://vietnamnet';
@@ -22,7 +22,45 @@
          * @return boolean
          */
         public function validateUrl(){
-            $title = $this->doc->getElementsBytagName('h1');
-            return strlen($title[0]->nodeValue) > 4 ?  true : false;
+            if($this->getTitle()){
+                return true;
+            }else {
+                return false;
+            }
+        }
+
+        /**
+         * @param $pat1 string
+         * @param $pat2 string
+         * @return string or boolean
+         */
+        protected function getData($pat1, $pat2){
+            $htmlSelector = array();
+            $start = 0;
+            $offset = 0;
+            $end = 0;
+            $lenght = 0;
+            $data = '';
+            /**
+             * get position of data story in $htmlSelector
+             */
+            while($start = stripos($this->doc, $pat1, $offset)){
+                $end = stripos($this->doc, $pat2, $offset = $start);
+                $lenght = $end - $start;
+                $htmlSelector[] = array(
+                    "start" => $start,
+                    "lenght" => $lenght
+                );
+                $offset = $start + 1;
+            }
+
+            /**
+             * get data
+             */
+            foreach($htmlSelector as $html){
+                $data .= substr($this->doc, $html['start'], $html['lenght']);
+                $data .= $pat2;
+            }
+            return strlen($data) == 0 ? false : $data;
         }
     }

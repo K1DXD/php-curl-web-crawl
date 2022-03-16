@@ -11,31 +11,27 @@
          * @return string
          */
         public function getTitle(){
-            $title = $this->doc->getElementsByTagName('h1');
-            return $title[0]->nodeValue;            
+            $pat1 = '<h1 class="title-page detail">';
+            $pat2 = '</h1>';
+            return $this->getData($pat1, $pat2);     
         }
 
         /**
          * @return string
          */
         public function getContent(){
-            $elements = $this->doc->getElementsByTagName('p');
-            $content;
-            foreach($elements as $element){
-                if($element->parentNode->nodeName == 'div'){
-                    $content .= $element->nodeValue;
-                    $content .= '<br>';
-                }
-            }
-            return $content;
+            $pat1 = '<p>';
+            $pat2 = '</p>';
+            return $this->getData($pat1, $pat2);  
         }
 
         /**
          * @return string
          */
         public function getDate(){
-            $date = $this->doc->getElementsByTagName('time');
-            return $date[0]->nodeValue;
+            $pat1 = '<time class="author-time"';
+            $pat2 = '</time>';
+            return $this->getData($pat1, $pat2);  
         }
 
     }

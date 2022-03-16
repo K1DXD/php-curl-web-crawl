@@ -14,7 +14,7 @@
         
         /**
          * @param $url string
-         * @param $doc DOMDocument
+         * @param $doc string
          */
         public function __construct($url, $doc){
             $this->url = $url;
@@ -22,7 +22,7 @@
         }
 
         /**
-         * @return boolean|call caseLogic()
+         * @return boolean or call caseLogic()
          */
         function factoryParser(){
             if(preg_match(self::PAT, $this->url, $match) && $this->doc){
