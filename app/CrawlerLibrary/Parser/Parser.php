@@ -45,7 +45,8 @@
              * get position of data story in $htmlSelector
              */
             while($start = stripos($this->doc, $pat1, $offset)){
-                $end = stripos($this->doc, $pat2, $offset = $start);
+                $end = strpos($this->doc, $pat2, $offset = $start);
+                $start = $start + strlen($pat1);
                 $lenght = $end - $start;
                 $htmlSelector[] = array(
                     "start" => $start,
@@ -59,7 +60,7 @@
              */
             foreach($htmlSelector as $html){
                 $data .= substr($this->doc, $html['start'], $html['lenght']);
-                $data .= $pat2;
+                // $data .= $pat3;
             }
             return strlen($data) == 0 ? false : $data;
         }
