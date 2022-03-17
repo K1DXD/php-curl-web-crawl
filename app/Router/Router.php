@@ -15,6 +15,8 @@
             if(!$this->logic->checkForm()){
                 return header("Location: /app/Form/form.php");
             }
-            $this->logic->action();
+            else {
+                $this->logic->action();
+            }
         }
     }
