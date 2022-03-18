@@ -7,13 +7,14 @@
      * get the data needed
      */
     class DataHandler {
-        /**
-         * @var boolean or PageParser
-         */
-        private $parser;
 
         /** @var string */
         private $url;
+
+        /**
+         * @var mixed boolean|PageParser
+         */
+        public $parser;
 
         public function __construct($url){
             $this->url = $url;

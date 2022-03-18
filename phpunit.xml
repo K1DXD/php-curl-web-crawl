@@ -4,7 +4,7 @@
         bootstrap="vendor/autoload.php">
     <testsuites>
         <testsuite name="Test crawltool">
-            <directory>tests</directory>
+            <directory suffix=".php">tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>

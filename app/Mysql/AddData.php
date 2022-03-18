@@ -4,15 +4,18 @@
         /**
          * @var PDO
          */
-        private $connection;
+        protected $connection;
+        protected $username;
+        protected $password;
 
         /**
          * @param $username string
          * @param $password string
          */
         public function __construct($username, $password) {
-            $conn = new Connection('mysql:host=localhost;dbname=curl_php', $username, $password);
-            $this->connection = $conn->connectDb();
+            $this->username = $username;
+            $this->password = $password;
+            $this->createConnect();
         }
 
         /**
@@ -30,9 +33,15 @@
                 $query->bindParam(':date', $date);
                 $query->bindParam(':title', $title);
                 $query->execute();
-                echo 'added';
+                return true;
             } catch (PDOExeption $e) {
                 echo 'Error: ' . $e->getMessage();
             }
+        }
+
+        protected function createConnect()
+        {
+            $conn = new Connection('mysql:host=localhost;dbname=curl_php', $this->username, $this->password);
+            $this->connection = $conn->connectDb();
         }
     }

@@ -7,10 +7,12 @@
      */
     class FactoryParser{
         const PAT = '/^\w+\:..(\w+)/';
+
         /** @var string*/
-        private $url;
-        /** @var DOMDocument */
-        private $doc;
+        public $url;
+
+        /** @var string */
+        public $doc;
         
         /**
          * @param $url string
@@ -25,7 +27,8 @@
          * @return boolean or call caseLogic()
          */
         function factoryParser(){
-            if(preg_match(self::PAT, $this->url, $match) && $this->doc){
+            if($this->doc){
+                preg_match(self::PAT, $this->url, $match);
                 return $this->caseLogic($match[0]);
             }else {
                 return false;
@@ -36,7 +39,7 @@
          * @param $data string
          * @return about PageParser or boolean false
          */
-        private function caseLogic($data){
+        public function caseLogic($data){
             switch ($data){
                 case Parser::VIETNAMNET :
                     return new PageParser\DantriParser($this->doc, $this->url);

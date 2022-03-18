@@ -8,7 +8,7 @@
      */
     class Logic {
         /** @var array */
-        private $data;
+        public $data;
 
         /**
          * get username, password, url from POST resquest
@@ -28,13 +28,10 @@
          * get parse data and add to database
          */
         public function action(){
-            $parser = new DataHandler($this->data['url']);
-            if($parser = $parser->getData()){
-                $parser = json_decode($parser);
-                $sql = new AddData($this->data['username'], $this->data['password']);
-                $sql->add($parser->content, $parser->date, $parser->title);
+            if($parser = $this->getParser(new DataHandler($this->data['url']))){
+                return $this->addData($parser);
             }else {
-                echo 'Invalid url!!!';
+                return false;
             }
         }
         
@@ -46,5 +43,20 @@
                 if(!$d) return false;
             }
             return true;
+        }
+
+        protected function getParser(DataHandler $parser)
+        {
+            if($parser = $parser->getData()){
+                return json_decode($parser);
+            }else {
+                return false;
+            }
+        }
+
+        protected function addData($parser)
+        {
+            $add = new AddData($this->data['username'], $this->data['password']);
+            return $add->add($parser->content, $parser->date, $parser->title);
         }
     }

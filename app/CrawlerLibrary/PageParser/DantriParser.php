@@ -29,8 +29,8 @@
          * @return string
          */
         public function getDate(){
-            $pat1 = '<time class="author-time"';
-            $pat2 = '</time>';
+            $pat1 = '<time class="author-time" datetime="';
+            $pat2 = '">';
             return $this->getData($pat1, $pat2);  
         }
 

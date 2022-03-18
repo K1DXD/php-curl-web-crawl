@@ -31,6 +31,8 @@
         public function getDate(){
             $pat1 = '<span class="ArticleDate">';
             $pat2 = '</span>';
+            $pat3 = '/(\s+)/';
+            return preg_replace($pat3, ' ', $this->getData($pat1, $pat2));
             return $this->getData($pat1, $pat2); 
         }
 
